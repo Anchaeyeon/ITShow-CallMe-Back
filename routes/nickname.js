@@ -3,8 +3,8 @@ const Users = require('../models/User');
 
 const router = express.Router();
 
-// 이름 입력
-router.post('/nickname', async (req, res) => {
+// 닉네임 입력
+router.post('/', async (req, res) => {
     const { nickname } = req.body;
     try {
         await Users.create({nickname});

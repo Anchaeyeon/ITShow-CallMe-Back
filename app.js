@@ -2,7 +2,7 @@ const express = require('express');
 const methodOverride = require('method-override');
 
 const sequelize = require('./models/index');
-const userRouter = require('./routes/users'); 
+const nicknameRouter = require('./routes/nickname'); 
 const app = express();
 
 app.use(methodOverride('_method'));
@@ -18,7 +18,7 @@ sequelize.sync({ force: false })  // force: false로 설정해서 기존 테이�
     console.error('디비와 테이블 동기화 실패:', error);
   });
 
-app.use('/users', userRouter);
+app.use('/nickname', nicknameRouter);
 
 app.listen(3000, () => {
     console.log('서버가 http://localhost:3000 에서 실행 중입니다.');
