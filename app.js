@@ -1,8 +1,13 @@
 const express = require('express');
-const sequelize = require('./models/index');
-const User = require('./models/User');
+const methodOverride = require('method-override');
 
+const sequelize = require('./models/index');
+const userRouter = require('./routes/users'); 
 const app = express();
+
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 // 서버 시작 전 테이블 동기화
 sequelize.sync({ force: false })  // force: false로 설정해서 기존 테이블 덮어쓰지 않음
@@ -12,6 +17,8 @@ sequelize.sync({ force: false })  // force: false로 설정해서 기존 테이�
   .catch((error) => {
     console.error('디비와 테이블 동기화 실패:', error);
   });
+
+app.use('/users', userRouter);
 
 app.listen(3000, () => {
     console.log('서버가 http://localhost:3000 에서 실행 중입니다.');
