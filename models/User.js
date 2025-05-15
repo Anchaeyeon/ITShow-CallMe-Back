@@ -13,6 +13,9 @@ const User = sequelize.define('User', {
   },
   email: {
     type: DataTypes.STRING(50),
+  },
+  capturePhoto: {
+    type: DataTypes.STRING(500),
   }
 });
 
