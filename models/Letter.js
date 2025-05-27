@@ -15,7 +15,7 @@ const Letter = sequelize.define('Letter', {
   },
   userId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    //allowNull: false,
     //fk(외래키 추가)
     references: {
         model: User, //참조할 테이블
@@ -24,7 +24,7 @@ const Letter = sequelize.define('Letter', {
   },
   idolId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    //allowNull: false,
     references: {
         model: Idol,
         key: 'id'

@@ -5,6 +5,7 @@ const sequelize = require('./models/index');
 const nicknameRouter = require('./routes/nickname'); 
 const emailRouter = require('./routes/email');
 const idolRouter = require('./routes/idol');
+const letterRouter = require('./routes/letter');
 const app = express();
 
 // Sequelize가 테이블 생성을 인식할 수 있게 모델들을 불러오기
@@ -33,6 +34,9 @@ app.use('/email', emailRouter);
 
 // 아이돌
 app.use('/idol', idolRouter);
+
+// 편지
+app.use('/letter', letterRouter);
 
 app.listen(3000, () => {
     console.log('서버가 http://localhost:3000 에서 실행 중입니다.');
