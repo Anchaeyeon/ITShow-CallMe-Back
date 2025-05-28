@@ -1,16 +1,12 @@
 const express = require('express');
 const methodOverride = require('method-override');
 
-const sequelize = require('./models/index');
+const { sequelize } = require('./models/index');
 const nicknameRouter = require('./routes/nickname'); 
 const emailRouter = require('./routes/email');
 const idolRouter = require('./routes/idol');
+const letterRouter = require('./routes/letter');
 const app = express();
-
-// Sequelize가 테이블 생성을 인식할 수 있게 모델들을 불러오기
-const User = require('./models/User');
-const Idol = require('./models/Idol');
-const Letter = require('./models/Letter');
 
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({extended: true}));
@@ -33,6 +29,9 @@ app.use('/email', emailRouter);
 
 // 아이돌
 app.use('/idol', idolRouter);
+
+// 편지
+app.use('/letter', letterRouter);
 
 app.listen(3000, () => {
     console.log('서버가 http://localhost:3000 에서 실행 중입니다.');

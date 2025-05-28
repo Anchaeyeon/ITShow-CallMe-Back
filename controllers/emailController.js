@@ -1,4 +1,4 @@
-const Users = require("../models/User");
+const { User } = require("../models");
 
 const emailController = {
   // 이메일 입력
@@ -6,7 +6,7 @@ const emailController = {
     const { id } = req.params;
     const { email } = req.body;
     try {
-      const [isUpdated] = await Users.update({ email }, { where: { id } });
+      const [isUpdated] = await User.update({ email }, { where: { id } });
       if (isUpdated) {
         res.send("이메일 수정 완료");
       } else {
