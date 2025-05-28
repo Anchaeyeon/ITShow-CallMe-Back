@@ -1,4 +1,4 @@
-const Letter = require("../models/Letter");
+const { Letter } = require("../models");
 
 const letterController = {
   // 메세지 입력

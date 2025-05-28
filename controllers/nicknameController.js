@@ -1,15 +1,15 @@
-const Users = require("../models/User");
+const { User } = require("../models");
 
 const nicknameController = {
   // 닉네임 입력
   addNickname: async (req, res) => {
     const { nickname } = req.body;
     try {
-      await Users.create({ nickname });
+      await User.create({ nickname });
       res.send("닉네임 저장 완료");
     } catch (err) {
       console.error("데이터 베이스 쿼리 실패 : ", err);
-      res.status(500).send("Insternal Server Error");
+      res.status(500).send(`Internal Server Error: ${err.message}`);
     }
   },
 
@@ -17,7 +17,7 @@ const nicknameController = {
   getNicknameDetail: async (req, res) => {
     const nicknameId = req.params.id;
     try {
-      const nickname = await Users.findByPk(nicknameId);
+      const nickname = await User.findByPk(nicknameId);
       if (!nickname) {
         res.status(404).send("닉네임을 찾을 수 없습니다.");
         return;

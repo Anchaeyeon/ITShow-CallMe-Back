@@ -1,4 +1,4 @@
-const Idol = require("../models/Idol");
+const { Idol } = require("../models");
 
 const idolController = {
   // 아이돌 사진 반환
