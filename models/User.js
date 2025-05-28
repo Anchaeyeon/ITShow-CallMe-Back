@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
   });
 
   User.associate = models => {
-    User.hasOne(models.Letter, { foreignKey: 'userId', sourceKey: 'id' });
+    User.hasMany(models.Letter, { foreignKey: 'userId', sourceKey: 'id' });
   };
 
   return User;

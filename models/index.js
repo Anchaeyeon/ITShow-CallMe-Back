@@ -9,7 +9,6 @@ const sequelize = new Sequelize(
     logging: false,
 });
 
-// sequelize 인스턴스를 전달
 const User = require('./User')(sequelize);
 const Letter = require('./Letter')(sequelize);
 const Idol = require('./Idol')(sequelize);
@@ -20,4 +19,13 @@ Letter.belongsTo(User, { foreignKey: 'userId', sourceKey: 'id' }); // 편지는 
 Idol.hasOne(Letter, { foreignKey: 'idolId', sourceKey: 'id' });
 Letter.belongsTo(Idol, { foreignKey: 'idolId', sourceKey: 'id' });
 
-module.exports = { sequelize, User, Letter, Idol };
+const models = { sequelize, User, Letter, Idol };
+
+// 관계 설정 호출 (여기서 associate 실행)
+Object.values(models).forEach(model => {
+  if (typeof model.associate === 'function') {
+    model.associate(models);
+  }
+});
+
+module.exports = models;
