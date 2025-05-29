@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
   );
 
   Idol.associate = models => {
-    Idol.hasOne(models.Letter, { foreignKey: 'idolId', sourceKey: 'id' });
+    Idol.hasMany(models.Letter, { foreignKey: 'idolId', sourceKey: 'id' });
   };
 
   return Idol;
