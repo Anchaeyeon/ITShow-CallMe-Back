@@ -12,11 +12,15 @@ const sequelize = new Sequelize(
 const User = require('./User')(sequelize);
 const Letter = require('./Letter')(sequelize);
 const Idol = require('./Idol')(sequelize);
+const IdolVideo = require('./IdolVideo')(sequelize);
 
 Idol.hasOne(Letter, { foreignKey: 'idolId', sourceKey: 'id' });
 Letter.belongsTo(Idol, { foreignKey: 'idolId', sourceKey: 'id' });
 
-const models = { sequelize, User, Letter, Idol };
+Idol.hasMany(IdolVideo, { foreignKey: 'idolId', sourceKey: 'id' });
+IdolVideo.belongsTo(Idol, { foreignKey: 'idolId', targetKey: 'id' });
+
+const models = { sequelize, User, Letter, Idol, IdolVideo };
 
 // 관계 설정 호출 (여기서 associate 실행)
 Object.values(models).forEach(model => {
