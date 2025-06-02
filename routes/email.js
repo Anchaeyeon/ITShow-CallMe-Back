@@ -5,14 +5,15 @@ const path = require("path");
 
 const router = express.Router();
 
-// 로컬 폴더에 지정
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/capture_img/"); // 저장 폴더 (어디 폴더에 사진을 저장할 지 폴더 지정)
   },
   filename: function (req, file, cb) {
-    const imageName = Date.now() + "-" + file.originalname;
-    cb(null, imageName);
+    const extension = path.extname(file.originalname); // 확장자(jpg, png 등등) 지정
+    const date = new Date().toISOString().slice(0, 10).replace(/-/g, ''); // YYYYMMDD 형식
+    const filename = `${date}-CallMe${extension}`;
+    cb(null, filename);
   },
 });
 const upload = multer({ storage });

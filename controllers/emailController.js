@@ -40,7 +40,7 @@ const emailController = {
         from: process.env.EMAIL_NAME,
         to: userEmail,
         subject: 'CallMe 이미지가 도착했습니다!',
-        text: '이미지를 저장해주세요. CallMe를 이용해주셔서 감사합니다♡',
+        text: '이미지를 저장해주세요.\nCallMe를 이용해주셔서 감사합니다♡',
         attachments: [
           {
             filename: req.file.filename,
