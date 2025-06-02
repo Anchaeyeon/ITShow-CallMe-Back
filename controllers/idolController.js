@@ -1,6 +1,7 @@
 const { Idol } = require("../models");
 
 const idolController = {
+  // 아이돌 클릭 시 클릭 횟수 증가
   clickIdol: async (req, res) => {
     const id = req.params.id;
     try {

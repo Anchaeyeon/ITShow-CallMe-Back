@@ -11,10 +11,13 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(255),
         allowNull: false,
     },
+    nickname: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
   });
 
   Letter.associate = models => {
-    Letter.belongsTo(models.User, {foreignKey: "userId", sourceKey : "id"});
     Letter.belongsTo(models.Idol, {foreignKey: "idolId", sourceKey : "id"});
   };
 

@@ -7,21 +7,14 @@ module.exports = (sequelize) => {
         primaryKey: true,
         autoIncrement: true,
     },
-    nickname: {
-        type: DataTypes.STRING(20),
-        allowNull: false,
-    },
     email: {
       type: DataTypes.STRING(50),
+      allowNull: false,
     },
     capturePhoto: {
       type: DataTypes.STRING(500),
     }
   });
-
-  User.associate = models => {
-    User.hasMany(models.Letter, { foreignKey: 'userId', sourceKey: 'id' });
-  };
 
   return User;
 }
