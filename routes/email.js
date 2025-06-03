@@ -10,10 +10,8 @@ const storage = multer.diskStorage({
     cb(null, "uploads/capture_img/"); // 저장 폴더 (어디 폴더에 사진을 저장할 지 폴더 지정)
   },
   filename: function (req, file, cb) {
-    const extension = path.extname(file.originalname); // 확장자(jpg, png 등등) 지정
-    const date = new Date().toISOString().slice(0, 10).replace(/-/g, ''); // YYYYMMDD 형식
-    const filename = `${date}-CallMe${extension}`;
-    cb(null, filename);
+    const imageName = Date.now() + "-CallMe-" + file.originalname;  // 파일(사진) 이름
+    cb(null, imageName);
   },
 });
 const upload = multer({ storage });

@@ -18,7 +18,7 @@ const idolController = {
     }
   },
 
-  // 아이돌 사진 반환
+  // 아이돌 사진 반환 (모든 정보 반환이니까 프론트에서 사진만 화면에 보이게 하기)
   getIdolAllImage: async (req, res) => {
     try {
       const idolImg = await Idol.findAll({ attributes: ["id", "idolName", "idolImages", "videoCallCount"] });
