@@ -12,6 +12,18 @@ const IdolVideoController = {
       res.status(500).json({ message: "서버 에러" });
     }
   },
+
+  // 사용자가 누른 말풍선에 따른 비디오 보여주기
+  getIdolVideos: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const video = await IdolVideo.findOne({ where: {id}, attributes: ["videos"] });
+      res.json(video);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "서버 에러" });
+    }
+  }
 };
 
 module.exports = IdolVideoController;
