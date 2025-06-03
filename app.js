@@ -5,6 +5,7 @@ const { sequelize } = require('./models/index');
 const emailRouter = require('./routes/email');
 const idolRouter = require('./routes/idol');
 const letterRouter = require('./routes/letter');
+const idolVideoRoutet = require('./routes/idolVideo');
 const app = express();
 
 app.use(methodOverride('_method'));
@@ -28,6 +29,8 @@ app.use('/idol', idolRouter);
 
 // 편지
 app.use('/letter', letterRouter);
+
+app.use('/idolVideo', idolVideoRoutet);
 
 app.listen(3000, () => {
     console.log('서버가 http://localhost:3000 에서 실행 중입니다.');

@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     cb(null, "uploads/capture_img/"); // 저장 폴더 (어디 폴더에 사진을 저장할 지 폴더 지정)
   },
   filename: function (req, file, cb) {
-    const imageName = Date.now() + "-CallMe-" + file.originalname;
+    const imageName = Date.now() + "-CallMe-" + file.originalname;  // 파일(사진) 이름
     cb(null, imageName);
   },
 });
