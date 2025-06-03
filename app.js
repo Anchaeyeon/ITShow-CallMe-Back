@@ -30,6 +30,7 @@ app.use('/idol', idolRouter);
 // 편지
 app.use('/letter', letterRouter);
 
+// 아이돌 비디오
 app.use('/idolVideo', idolVideoRoutet);
 
 app.listen(3000, () => {
