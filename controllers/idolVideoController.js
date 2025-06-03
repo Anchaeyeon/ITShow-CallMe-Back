@@ -6,6 +6,9 @@ const IdolVideoController = {
     const idolId = req.params.id;
     try {
       const idolChoices = await IdolVideo.findAll({ where: {idolId}, attributes: ["id", "choices", "idolId"] });
+      if (idolChoices.length === 0) {
+        return res.status(404).send("해당 아이돌은 말풍선이 존재하지 않습니다.");
+      }
       res.json(idolChoices);
     } catch (err) {
       console.error(err);
