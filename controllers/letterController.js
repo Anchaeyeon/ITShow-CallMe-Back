@@ -9,7 +9,7 @@ const letterController = {
       if (!idol) {
         return res.status(404).send("아이돌 아이디가 존재하지 않습니다.");
       }
-      res.json({ idolName: idol.idolName });
+      res.json({ idolName: idol.idolName, id: idol.id });
     } catch (err) {
       console.error("데이터베이스 쿼리 실패 : ", err);
       res.status(500).send("Internal Server Error");
