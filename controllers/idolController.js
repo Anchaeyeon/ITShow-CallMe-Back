@@ -37,7 +37,7 @@ const idolController = {
   // 프론트에서 보여줘야 하는 사진이나 클릭 횟수 등 골라서 화면에 보이게 하면 돼!
   getIdolAllImage: async (req, res) => {
     try {
-      const idolImg = await Idol.findAll({ attributes: ["id", "idolName", "idolImages", "videoCallCount"] });
+      const idolImg = await Idol.findAll({ attributes: ["id", "idolName", "idolGroup", "idolGroupKor", "idolImages", "videoCallCount"] });
       res.json(idolImg);
     } catch (err) {
       console.error(err);

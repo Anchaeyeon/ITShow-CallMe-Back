@@ -10,6 +10,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(30),
         allowNull: false,
       },
+      idolGroup: {
+        type: DataTypes.STRING(30),
+        allowNull: false,
+      },
+      idolGroupKor: {
+        type: DataTypes.STRING(30),
+        allowNull: false,
+      },
       idolImages: {
         type: DataTypes.STRING(255),
         allowNull: false,
