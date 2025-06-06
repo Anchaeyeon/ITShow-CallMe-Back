@@ -25,6 +25,7 @@ const emailController = {
       }
       const userEmail = email.email;
       const captureImg = path.join(__dirname, '../uploads/capture_img', req.file.filename);
+      const captureImgDB = `uploads/capture_img/${req.file.filename}`;
 
       // 내 이메일 정의
       const transporter = nodemailer.createTransport({
@@ -52,6 +53,12 @@ const emailController = {
       // 이메일 전송
       await transporter.sendMail(mailContents);
       res.send('이메일 전송 완료');
+
+      // DB에 사진(경로) 저장
+      await User.update(
+        { capPhoto: captureImgDB },
+        { where: { id: email.id } }
+      );
 
     } catch (err) {
       console.error(err);

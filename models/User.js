@@ -11,6 +11,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+    capPhoto: {
+      type: DataTypes.STRING(255),
+    }
   });
 
   return User;
