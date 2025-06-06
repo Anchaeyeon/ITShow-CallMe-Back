@@ -34,10 +34,14 @@ const idolController = {
   },
 
   // 아이돌 아이디, 이름, 사진, 클릭 횟수 반환 (모든 정보 반환)
-  // 프론트에서 보여줘야 하는 사진이나 클릭 횟수 등 골라서 화면에 보이게 하면 돼!
   getIdolAllImage: async (req, res) => {
     try {
-      const idolImg = await Idol.findAll({ attributes: ["id", "idolName", "idolGroup", "idolGroupKor", "idolImages", "videoCallCount"] });
+      const idolImg = await Idol.findAll({
+        attributes: ["id", "idolName", "idolGroup", "idolGroupKor", "idolImages", "videoCallCount"],
+        order: [
+          ["videoCallCount", "DESC"], // 영상통화 횟수가 가장 많은 아이돌 순서대로 반환
+          ["updatedAt", "DESC"] // 횟수가 똑같으면 가장 최근에 통화한 아이돌이 위로 올라가도록 설정
+        ] });
       res.json(idolImg);
     } catch (err) {
       console.error(err);

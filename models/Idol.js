@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: false, // createdAt, updatedAt 안 씀
+      timestamps: true,
     }
   );
 
