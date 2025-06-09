@@ -33,6 +33,21 @@ const idolController = {
     }
   },
 
+  // 처음 통화 시작하면 인트로 영상 나오도록 반환
+  getIntroVideo: async (req, res) => {
+    const id = req.params.id;
+    try {
+      const idolIntro = await Idol.findOne({ where: {id}, attributes: ["intro"] });
+      if (!idolIntro) {
+        return res.status(404).send("아이돌 아이디가 존재하지 않습니다.");
+      }
+      res.json(idolIntro);
+    } catch (err) {
+      console.error("사용자가 선택한 아이돌 인트로 영상 반환 실패: ", err);
+      res.status(500).send("서버 에러");
+    }
+  },
+
   // 아이돌 아이디, 이름, 그룹이름(영어), 그룹이름(한국어), 사진, 클릭 횟수 반환 (모든 정보 반환)
   getIdolAllImage: async (req, res) => {
     try {
