@@ -15,4 +15,7 @@ router.get('/click/:id', idolController.clickIdol);
 // 사용자가 선택한 아이돌 클릭 횟수 반환하기
 router.get('/click/oneIdol/:id', idolController.getclickOneIdol);
 
+// 처음 통화 시작하면 인트로 영상 나오도록 반환
+router.get('/intro/:id', idolController.getIntroVideo);
+
 module.exports = router;
