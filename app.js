@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const methodOverride = require('method-override');
 const path = require('path');
 
@@ -9,6 +10,7 @@ const letterRouter = require('./routes/letter');
 const idolVideoRoutet = require('./routes/idolVideo');
 const app = express();
 
+app.use(cors());
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
