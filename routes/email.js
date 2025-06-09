@@ -20,7 +20,8 @@ const upload = multer({ storage });
 router.post("/", emailController.addEmail);
 
 // 이메일로 사진 전송
-router.post("/send", upload.single("image"), emailController.sendEmailandImg);
+router.post("/send", upload.single("captureImg"), emailController.sendEmailandImg);
+
 
 // 캡쳐 사진 반환
 router.get("/capPhoto", emailController.getCapturePhoto);

@@ -64,9 +64,10 @@ const emailController = {
         { where: { id: email.id } }
       );
     } catch (err) {
-      console.error(err);
-      res.status(500).send("이메일 전송 실패");
-    }
+  console.error(err);
+  res.status(500).send(`이메일 전송 실패: ${err.message}`);
+}
+
   },
 
   // 캡쳐 사진 프론트에 반환
