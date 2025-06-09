@@ -1,5 +1,6 @@
 const express = require('express');
 const methodOverride = require('method-override');
+const path = require('path');
 
 const { sequelize } = require('./models/index'); 
 const emailRouter = require('./routes/email');
@@ -11,6 +12,9 @@ const app = express();
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+// app.use('/images', express.static(path.join(__dirname, 'path_to_images_folder')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // 서버 시작 전 테이블 동기화
 sequelize.sync({ force: false })  // force: false로 설정해서 기존 테이블 덮어쓰지 않음, (true로 해서 테이블이 잘 생성되는지 확인해봄)
