@@ -32,8 +32,40 @@ const letterController = {
     }
   },
 
+  // 사용자가 고른 아이돌 한 명에 대한 편지 모두 반환
+  getIdolLetter: async (req, res) => {
+    const idolId = req.params.id;
+    try {
+      const idolLetters = await Letter.findAll({
+        where: { idolId },
+        attributes: ["message", "nickname"],
+        include: [
+          {
+            model: Idol,
+            attributes: ["idolName"],
+          },
+        ],
+      });
+      if (idolLetters.length === 0) {
+        return res.status(404).send("어떤 아이돌에 대해 쓴 편지가 존재하지 않습니다.");
+      }
+
+      // 필요한 데이터만 추출
+      const selectIdolLetters = idolLetters.map((letter) => ({
+        message: letter.message,
+        nickname: letter.nickname,
+        idolname: letter.Idol.idolName,
+      }));
+
+      res.json(selectIdolLetters);
+    } catch (err) {
+      console.error("아이돌 편지 조회 실패 ", err);
+      res.status(500).send("서버 에러");
+    }
+  },
+
   // 메세지(아이디에 따른 아이돌 이름, 메세지 내용, 사용자 닉네임) 1개 반환
-  getMessageDetail: async (req, res) => {
+  getOneMessageDetail: async (req, res) => {
     const messageId = req.params.id;
     try {
       const message = await Letter.findByPk(messageId, {
@@ -70,11 +102,11 @@ const letterController = {
           },
         ],
       });
-      if (!letter) {
+      if (letter.length === 0) {
         res.status(404).send("메세지를 찾을 수 없습니다.");
         return;
       }
-      
+
       // 필요한 데이터(메세지, 닉네임, 아이돌 이름)만 뽑아서 새로운 배열로 만들기
       const allLetters = letter.map((letter) => ({
         message: letter.message,
@@ -82,7 +114,6 @@ const letterController = {
         idolname: letter.Idol.idolName,
       }));
       res.json(allLetters);
-      
     } catch (err) {
       console.error("데이터베이스 쿼리 실패 : ", err);
       res.status(500).send("Internal Server Error");
