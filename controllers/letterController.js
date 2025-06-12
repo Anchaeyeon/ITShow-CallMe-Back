@@ -101,6 +101,9 @@ const letterController = {
             attributes: ["idolName"], // messageId 값의 아이돌 이름 가져오기
           },
         ],
+        order: [
+          ["id", "DESC"],
+        ]
       });
       if (letter.length === 0) {
         res.status(404).send("메세지를 찾을 수 없습니다.");
