@@ -15,6 +15,23 @@ const emailController = {
     }
   },
 
+  // 이메일 반환
+  getEmail: async (req, res) => {
+    try {
+      const oneEmail = await User.findOne({
+        attributes: ["id", "email"],
+        order: [["id", "DESC"]],
+      });
+      if (!oneEmail) {
+        return res.status(404).send("이메일이 존재하지 않습니다.");
+      }
+      res.json(oneEmail);
+    } catch (err) {
+      cconsole.error(err);
+      res.status(500).json({ message: "서버 에러" });
+    }
+  },
+
   sendEmailandImg: async (req, res) => {
     try {
       const email = await User.findOne({
@@ -64,10 +81,9 @@ const emailController = {
         { where: { id: email.id } }
       );
     } catch (err) {
-  console.error(err);
-  res.status(500).send(`이메일 전송 실패: ${err.message}`);
-}
-
+      console.error(err);
+      res.status(500).send(`이메일 전송 실패: ${err.message}`);
+    }
   },
 
   // 캡쳐 사진 프론트에 반환
