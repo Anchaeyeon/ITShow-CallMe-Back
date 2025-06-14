@@ -38,7 +38,7 @@ const letterController = {
     try {
       const idolLetters = await Letter.findAll({
         where: { idolId },
-        attributes: ["message", "nickname"],
+        attributes: ["id", "message", "nickname"],
         include: [
           {
             model: Idol,
@@ -52,6 +52,7 @@ const letterController = {
 
       // 필요한 데이터만 추출
       const selectIdolLetters = idolLetters.map((letter) => ({
+        id: letter.id,
         message: letter.message,
         nickname: letter.nickname,
         idolname: letter.Idol.idolName,
@@ -83,7 +84,7 @@ const letterController = {
       res.json({
         message: message.message,
         nickname: message.nickname,
-        idolname: message.Idol.idolName,
+        idolName: message.Idol.idolName,
       });
     } catch (err) {
       console.error("데이터베이스 쿼리 실패 : ", err);
@@ -95,6 +96,7 @@ const letterController = {
   getAllLetters: async (req, res) => {
     try {
       const letter = await Letter.findAll({
+        attributes: ["id", "message", "nickname"],
         include: [
           {
             model: Idol, // Idol 테이블과 조인
@@ -106,15 +108,15 @@ const letterController = {
         ]
       });
       if (letter.length === 0) {
-        res.status(404).send("메세지를 찾을 수 없습니다.");
-        return;
+        return res.status(404).json({ message: "메세지를 찾을 수 없습니다." });
       }
 
       // 필요한 데이터(메세지, 닉네임, 아이돌 이름)만 뽑아서 새로운 배열로 만들기
       const allLetters = letter.map((letter) => ({
+        id: letter.id,
         message: letter.message,
         nickname: letter.nickname,
-        idolname: letter.Idol.idolName,
+        idolName: letter.Idol.idolName,
       }));
       res.json(allLetters);
     } catch (err) {
