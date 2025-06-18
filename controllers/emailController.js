@@ -91,6 +91,7 @@ const emailController = {
     try {
       const captureImg = await User.findAll({
         attributes: ["id", "capPhoto"],
+        order: [["id", "DESC"]],
       });
       res.json(captureImg);
     } catch (err) {
