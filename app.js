@@ -10,7 +10,10 @@ const letterRouter = require("./routes/letter");
 const idolVideoRoutet = require("./routes/idolVideo");
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://callme-nine.vercel.app"],
+  credentials: true,
+}));
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
