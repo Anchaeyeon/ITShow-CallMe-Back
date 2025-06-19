@@ -11,7 +11,7 @@ const idolVideoRoutet = require("./routes/idolVideo");
 const app = express();
 
 app.use(cors({
-  origin: ["https://callme-nine.vercel.app"],
+  origin: ["https://callme-nine.vercel.app", "http://localhost:5173"],
   credentials: true,
 }));
 app.use(methodOverride("_method"));
