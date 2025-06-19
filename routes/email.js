@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     cb(null, imageName);
   },
 });
-const upload = multer({ storage });
+const upload = multer({ storage, limits: { fileSize: 10 * 1024 * 1024 } });
 
 // 이메일 입력
 router.post("/", emailController.addEmail);
