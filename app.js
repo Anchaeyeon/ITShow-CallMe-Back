@@ -14,6 +14,12 @@ app.use(cors({
   origin: ["https://callme-nine.vercel.app", "http://localhost:5173"],
   credentials: true,
 }));
+
+app.options('*', cors({
+  origin: ["https://callme-nine.vercel.app", "http://localhost:5173"],
+  credentials: true,
+}));
+
 app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
